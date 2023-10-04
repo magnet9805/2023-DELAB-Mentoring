@@ -1,0 +1,46 @@
+ELMO 모델 : forward, backword
+GPT 모델 : 보고자하는 단어의 후반부 전부 마스킹 후 학습
+
+목적 : Masked language model (MLM), Next sentence prediction (NSP)
+(마스킹, 다음문장 예측) (이 두가지 다를 학습 시키는게 목적)
+
+Masked language model (MLM) : 해당하는 단어만 마스킹 (포워드 백워드도 아닌 방향성이 없음)
+
+? : QA, NER, Sentiment Analysis, WordPiece
+
+QA(Question and Answering) 모델 : BERT와 같은 인코더 전용 모델은 
+"누가 Transformer 아키텍처를 발명했습니까?"와 같은 
+사실적인 질문(factoid questions)에 대한 답변을 추출하는 데 
+우수한 성능을 나타내는 경향이 있습니다. 
+그러나 "하늘은 왜 파란색입니까?"와 같은 
+개방형 질문(open-ended questions)이 주어지면 제대로 처리되지 않습니다.
+
+NER(Named Entity Recognition) (개체명 인식) : 
+이름을 가진 개체(named entity)를 인식하겠다는 것을 의미합니다. 
+좀 더 쉽게 설명하면, 어떤 이름을 의미하는 단어를 보고는 
+그 단어가 어떤 유형인지를 인식하는 것을 말합니다.
+ex) 유정이는 2018년에 골드만삭스에 입사했다
+-> 유정 - 사람  / 2018년 - 시간  / 골드만삭스 - 조직
+
+Sentiment Analysis (감성분석)
+
+WordPiece : Google이 BERT를 사전 학습하기 위해 개발한 토큰화 알고리즘
+
+
+BERT (base)의 총 파라미터 수는 110M이다.
+이유로는 OpenAI GPT와 동일 선상에서 비교하기 위함
+
+BERT에서 sentence는 일련의 단어들의 집합
+!!완벽한 문장(문법이 정확한)이 아니어도 된다.!!
+
+CLS : 모든 시퀀스의 시작을 알려주는 첫번째 토큰
+SEP : 두개의 센턴스를 구분하는(separating)하는 토큰
+
+sentence가 2개일 경우에는 CLS, SEP가 반드시 들어감
+
+
+Input/Output Representations 에서
+Segment embedding : CLS + sentence + SEP / 나머지 sentence
+			만약 이렇게 둘로 나눠진다면 768 * 2 = 1536개 노드
+			768 : BERT (base) 의 히든 노드 수
+
